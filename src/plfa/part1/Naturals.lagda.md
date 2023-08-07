@@ -518,13 +518,13 @@ _ : 3 * 4 ≡ 12
 _ =
   begin
     3 * 4
-  ≡⟨⟩ -- inductive case
+  ≡⟨⟩ -- inductive case of `_*_`
     4 + (2 * 4)
-  ≡⟨⟩ -- inductive case
+  ≡⟨⟩ -- inductive case of `_*_`
     4 + (4 + (1 * 4))
-  ≡⟨⟩ -- inductive case
+  ≡⟨⟩ -- inductive case of `_*_`
     4 + (4 + (4 + (0 * 4)))
-  ≡⟨⟩ -- base case
+  ≡⟨⟩ -- base case of `_*_`
     4 + (4 + (4 + 0))
   ≡⟨⟩ -- simplify
     12
@@ -542,9 +542,26 @@ Define exponentiation, which is given by the following equations:
 Check that `3 ^ 4` is `81`.
 
 ```agda
--- Your code goes here
-```
+_^_ : ℕ → ℕ → ℕ
+m ^ zero = 1
+m ^ (suc n) = m * (m ^ n)
 
+_ : 3 ^ 4 ≡ 81
+_ =
+  begin
+    3 ^ 4
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 ^ 3)
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 * (3 ^ 2))
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 * (3 * (3 ^ 1)))
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 * (3 * (3 * (3 ^ 0))))
+  ≡⟨⟩ -- base case of `_^_`
+    3 * (3 * (3 * (3 * 1)))
+  ∎
+```
 
 
 ## Monus
