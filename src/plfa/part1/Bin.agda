@@ -10,10 +10,10 @@ eleven = ⟨⟩ I O I I
 
 -- strategy : ripple up carry
 inc : Bin → Bin
-inc ⟨⟩ = ⟨⟩               -- (1) lhs exit case
-inc (bs O) = bs I         -- (2) inductive case on rhs 0     → inc in place and no carry
-inc (⟨⟩ I) = ⟨⟩ I O       -- (3) iff rhs 1 then enlarge size → dec in place and write carry
-inc (bs I) = (inc bs) O   -- (4) inductive case on rhs 1     → dec in place and carry
+inc ⟨⟩ = ⟨⟩               -- (1) base case               → unused
+inc (bs O) = bs I         -- (2) exit case on rhs 0      → inc in place and no carry
+inc (⟨⟩ I) = ⟨⟩ I O       -- (3) exit case on rhs 1      → dec in place and write carry enlarges
+inc (bs I) = (inc bs) O   -- (4) inductive case on rhs 1 → dec in place and carry
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl)
@@ -68,12 +68,13 @@ to : ℕ → Bin
 to zero    = ⟨⟩ O
 to (suc n) = inc (to n)
 
+-- strategy : treat left shift `O` as times 2 and left shift `I` as plus 2
 from : Bin → ℕ
-from ⟨⟩     = 0
-from (⟨⟩ I) = 1
-from (⟨⟩ O) = 0
-from (b O)  = (from b) * 2
-from (b I)  = (from b) + 2
+from ⟨⟩     = 0               -- (0) base case               → unused
+from (⟨⟩ I) = 1               -- (1) exit case               → we have a 1
+from (⟨⟩ O) = 0               -- (2) exit case               → we have a 0
+from (b O)  = (from b) * 2    -- (3) inductive case on rhs 0 → shift left carry 0 ≡ (from b) * 2 
+from (b I)  = (from b) + 2    -- (4) inductive case on rhs I → shift left carry 1 ≡ (from b) + 2
 
 -- going refl on the proofs :))
 
