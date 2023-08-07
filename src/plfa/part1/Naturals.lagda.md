@@ -605,6 +605,7 @@ _ =
     1
   ∎
 ```
+
 We did not use the second equation at all, but it will be required
 if we try to subtract a larger number from a smaller one:
 ```agda
@@ -642,7 +643,33 @@ Section [Logical Connectives](/Decidable/#logical-connectives).
 Compute `5 ∸ 3` and `3 ∸ 5`, writing out your reasoning as a chain of equations.
 
 ```agda
--- Your code goes here
+_ : 5 ∸ 3 ≡ 2
+_ =
+  begin
+    5 ∸ 3
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    4 ∸ 2
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    3 ∸ 1
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    2 ∸ 0
+  ≡⟨⟩ -- rule 1 of `_∸_`
+    2
+  ∎
+
+_ : 3 ∸ 5 ≡ 0
+_ =
+  begin
+    3 ∸ 5
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    2 ∸ 4
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    1 ∸ 3
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    0 ∸ 2
+  ≡⟨⟩ -- rule 2 of `_∸_`
+    0
+  ∎
 ```
 
 
