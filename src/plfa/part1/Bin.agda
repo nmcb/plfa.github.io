@@ -60,3 +60,34 @@ _ =
   ≡⟨⟩ -- case 2
     ⟨⟩ I O I
   ∎
+
+import plfa.part1.Naturals as Nat
+open Nat using (ℕ; zero; suc; _+_; _*_)
+
+to : ℕ → Bin
+to zero    = ⟨⟩ O
+to (suc n) = inc (to n)
+
+from : Bin → ℕ
+from ⟨⟩     = 0
+from (⟨⟩ I) = 1
+from (⟨⟩ O) = 0
+from (b O)  = (from b) * 2
+from (b I)  = (from b) + 2
+
+-- going refl on the proofs :))
+
+_ : 0 ≡ from (⟨⟩ O)
+_ = refl
+
+_ : 1 ≡ from (⟨⟩ I)
+_ = refl
+
+_ : 2 ≡ from (⟨⟩ I O)
+_ = refl
+
+_ : 3 ≡ from (⟨⟩ I I)
+_ = refl
+
+_ : 4 ≡ from (⟨⟩ I O O)
+_ = refl

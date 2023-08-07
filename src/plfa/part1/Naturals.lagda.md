@@ -1016,9 +1016,7 @@ For the former, choose the bitstring to have no leading zeros if it
 represents a positive natural, and represent zero by `⟨⟩ O`.
 Confirm that these both give the correct answer for zero through four.
 
-```agda
--- Your code goes here
-```
+> see `plfa.part1.Bin`
 
 
 ## Standard library
