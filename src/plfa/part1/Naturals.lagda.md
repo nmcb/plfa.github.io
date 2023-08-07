@@ -848,6 +848,7 @@ for addition of numbers less than _n_ first appear by day _n+1_.
 This gives an entirely finitist view of infinite sets of data and
 equations relating the data.
 
+> that is waaaaaay cool - finitist view ftw <3
 
 ## Writing definitions interactively
 
