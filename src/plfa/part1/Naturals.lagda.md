@@ -514,7 +514,21 @@ Compute `3 * 4`, writing out your reasoning as a chain of equations, using the e
 (You do not need to step through the evaluation of `+`.)
 
 ```agda
--- Your code goes here
+_ : 3 * 4 ≡ 12
+_ =
+  begin
+    3 * 4
+  ≡⟨⟩ -- inductive case
+    4 + (2 * 4)
+  ≡⟨⟩ -- inductive case
+    4 + (4 + (1 * 4))
+  ≡⟨⟩ -- inductive case
+    4 + (4 + (4 + (0 * 4)))
+  ≡⟨⟩ -- base case
+    4 + (4 + (4 + 0))
+  ≡⟨⟩ -- simplify
+    12
+  ∎
 ```
 
 
