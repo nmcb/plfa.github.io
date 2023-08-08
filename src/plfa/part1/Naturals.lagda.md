@@ -78,7 +78,8 @@ successor of two; and so on.
 Write out `7` in longhand.
 
 ```agda
--- Your code goes here
+seven : ℕ
+seven = suc (suc (suc (suc (suc (suc (suc zero))))))
 ```
 
 You will need to give both a type signature and definition for the
@@ -437,7 +438,21 @@ other word for evidence, which we will use interchangeably, is _proof_.
 Compute `3 + 4`, writing out your reasoning as a chain of equations, using the equations for `+`.
 
 ```agda
--- Your code goes here
+_ : 3 + 4 ≡ 7
+_ =
+  begin
+    3 + 4
+  ≡⟨⟩ -- shorthand for
+    (suc (suc (suc zero))) + (suc (suc (suc (suc zero))))
+  ≡⟨⟩ -- inductive case of `_+_`
+    suc ((suc (suc zero)) + (suc (suc (suc (suc zero)))))
+  ≡⟨⟩ -- inductive case of `_+_`
+    suc (suc ((suc zero) + (suc (suc (suc (suc zero))))))
+  ≡⟨⟩ -- inductive case of `_+_`
+    suc (suc (suc (zero + (suc (suc (suc (suc zero)))))))
+  ≡⟨⟩ -- base case of `_+_`
+    suc (suc (suc (suc (suc (suc (suc zero))))))
+  ∎
 ```
 
 
@@ -499,7 +514,21 @@ Compute `3 * 4`, writing out your reasoning as a chain of equations, using the e
 (You do not need to step through the evaluation of `+`.)
 
 ```agda
--- Your code goes here
+_ : 3 * 4 ≡ 12
+_ =
+  begin
+    3 * 4
+  ≡⟨⟩ -- inductive case of `_*_`
+    4 + (2 * 4)
+  ≡⟨⟩ -- inductive case of `_*_`
+    4 + (4 + (1 * 4))
+  ≡⟨⟩ -- inductive case of `_*_`
+    4 + (4 + (4 + (0 * 4)))
+  ≡⟨⟩ -- base case of `_*_`
+    4 + (4 + (4 + 0))
+  ≡⟨⟩ -- simplify
+    12
+  ∎
 ```
 
 
@@ -513,9 +542,28 @@ Define exponentiation, which is given by the following equations:
 Check that `3 ^ 4` is `81`.
 
 ```agda
--- Your code goes here
-```
+_^_ : ℕ → ℕ → ℕ
+m ^ zero = 1
+m ^ (suc n) = m * (m ^ n)
 
+_ : 3 ^ 4 ≡ 81
+_ =
+  begin
+    3 ^ 4
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 ^ 3)
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 * (3 ^ 2))
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 * (3 * (3 ^ 1)))
+  ≡⟨⟩ -- inductive case of `_^_`
+    3 * (3 * (3 * (3 * (3 ^ 0))))
+  ≡⟨⟩ -- base case of `_^_`
+    3 * (3 * (3 * (3 * 1)))
+  ≡⟨⟩ -- simplify
+    81
+  ∎
+```
 
 
 ## Monus
@@ -559,6 +607,7 @@ _ =
     1
   ∎
 ```
+
 We did not use the second equation at all, but it will be required
 if we try to subtract a larger number from a smaller one:
 ```agda
@@ -596,7 +645,33 @@ Section [Logical Connectives](/Decidable/#logical-connectives).
 Compute `5 ∸ 3` and `3 ∸ 5`, writing out your reasoning as a chain of equations.
 
 ```agda
--- Your code goes here
+_ : 5 ∸ 3 ≡ 2
+_ =
+  begin
+    5 ∸ 3
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    4 ∸ 2
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    3 ∸ 1
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    2 ∸ 0
+  ≡⟨⟩ -- rule 1 of `_∸_`
+    2
+  ∎
+
+_ : 3 ∸ 5 ≡ 0
+_ =
+  begin
+    3 ∸ 5
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    2 ∸ 4
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    1 ∸ 3
+  ≡⟨⟩ -- rule 3 of `_∸_`
+    0 ∸ 2
+  ≡⟨⟩ -- rule 2 of `_∸_`
+    0
+  ∎
 ```
 
 
@@ -775,6 +850,7 @@ for addition of numbers less than _n_ first appear by day _n+1_.
 This gives an entirely finitist view of infinite sets of data and
 equations relating the data.
 
+> that is waaaaaay cool - finitist view ftw <3
 
 ## Writing definitions interactively
 
@@ -942,9 +1018,7 @@ For the former, choose the bitstring to have no leading zeros if it
 represents a positive natural, and represent zero by `⟨⟩ O`.
 Confirm that these both give the correct answer for zero through four.
 
-```agda
--- Your code goes here
-```
+> see `plfa.part1.Bin`
 
 
 ## Standard library
