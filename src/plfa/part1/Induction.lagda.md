@@ -510,6 +510,7 @@ Here is the lemma's statement and proof:
     suc (suc m + n)
   ∎
 ```
+
 The signature states that we are defining the identifier `+-suc` which provides
 evidence for the proposition:
 
@@ -572,6 +573,7 @@ Finally, here is our proposition's statement and proof:
     suc n + m
   ∎
 ```
+
 The first line states that we are defining the identifier
 `+-comm` which provides evidence for the proposition:
 
@@ -624,6 +626,7 @@ will suggest what lemmas to prove.
 
 We can apply associativity to rearrange parentheses however we like.
 Here is an example:
+
 ```agda
 +-rearrange : ∀ (m n p q : ℕ) → (m + n) + (p + q) ≡ m + (n + p) + q
 +-rearrange m n p q =
@@ -635,6 +638,7 @@ Here is an example:
     (m + (n + p)) + q
   ∎
 ```
+
 No induction is required, we simply apply associativity twice.
 A few points are worthy of note.
 
@@ -1008,7 +1012,20 @@ just apply the previous results which show addition
 is associative and commutative.
 
 ```agda
--- Your code goes here
++-swap : ∀ (m n p : ℕ) → m + (n + p) ≡ n + (m + p)
++-swap m n p =
+  begin
+    m + (n + p)
+  -- using symmetry of +-assoc, ie. move brackets to the left 
+  ≡⟨ sym (+-assoc m n p) ⟩       
+    (m + n) + p
+  -- using congruence of rhs addition on +-comm, ie. 
+  ≡⟨ cong (\x → x + p) (+-comm m n) ⟩  
+    (n + m) + p
+  -- using +-assoc, move brackets to the right
+  ≡⟨ +-assoc n m p ⟩
+    n + (m + p)
+  ∎
 ```
 
 
