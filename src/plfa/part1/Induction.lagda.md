@@ -1038,7 +1038,24 @@ Show multiplication distributes over addition, that is,
 for all naturals `m`, `n`, and `p`.
 
 ```agda
--- Your code goes here
+*-distrib-+ : ∀ (p m n : ℕ) → (m + n) * p ≡ (m * p) + (n * p)
+
+*-distrib-+ p zero n =
+  refl
+
+*-distrib-+ p (suc m) n =
+  begin
+    (suc m + n) * p
+  -- using multiplication being defined as inductive addition on m
+  ≡⟨ refl ⟩
+    p + (m + n) * p
+  -- using distribution of multiplication over addition being congruent
+  ≡⟨ cong (_+_ p) (*-distrib-+ p m n) ⟩
+    p + (m * p + n * p)
+  -- using symmetry of +-assoc as with +-swap, and refl as above
+  ≡⟨ sym (+-assoc p (m * p) (n * p)) ⟩
+    suc m * p + n * p
+  ∎
 ```
 
 
