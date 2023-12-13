@@ -607,16 +607,14 @@ confluence L↠M₁ L↠M₂
 
 ## Notes
 
-Broadly speaking, this proof of confluence, based on parallel
-reduction, is due to W. Tait and P. Martin-Löf (see Barendregt 1984,
-Section 3.2).  Details of the mechanization come from several sources.
-The `subst-par` lemma is the "strong substitutivity" lemma of Shafer,
-Tebbi, and Smolka (ITP 2015). The proofs of `par-triangle`, `strip`,
+This mechanized proof of confluence is based on several sources. The
+`subst-par` lemma is the "strong substitutivity" lemma of
+@Schafer:2015. The proofs of `par-triangle`, `strip`,
 and `par-confluence` are based on the notion of complete development
-by Takahashi (1995) and Pfenning's 1992 technical report about the
+by @Takahashi:1995 and the technical report by @Pfenning:1992 about the
 Church-Rosser theorem. In addition, we consulted Nipkow and
 Berghofer's mechanization in Isabelle, which is based on an earlier
-article by Nipkow (JAR 1996).
+paper by @Nipkow:1996.
 
 ## Unicode
 

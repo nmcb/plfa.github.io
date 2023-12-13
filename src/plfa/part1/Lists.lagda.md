@@ -350,6 +350,10 @@ reverse of the second appended to the reverse of the first:
 
     reverse (xs ++ ys) ≡ reverse ys ++ reverse xs
 
+```agda
+-- Your code goes here
+```
+
 
 #### Exercise `reverse-involutive` (recommended)
 
@@ -357,6 +361,10 @@ A function is an _involution_ if when applied twice it acts
 as the identity function.  Show that reverse is an involution:
 
     reverse (reverse xs) ≡ xs
+
+```agda
+-- Your code goes here
+```
 
 
 ## Faster reverse
