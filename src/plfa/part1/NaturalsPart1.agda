@@ -19,7 +19,7 @@ infixl 6  _+_
 -- zero + m = {!   0!}
 -- suc n + m = {!   1!}
 
--- day 3 - after returning m as the base induction step with C-c C-space on hole 1
+-- day 3 - after returning m as the base induction step with C-c C-space on hole 0
 -- _+_ : ℕ → ℕ → ℕ
 -- zero + m = m
 -- suc n + m = {!   1!}

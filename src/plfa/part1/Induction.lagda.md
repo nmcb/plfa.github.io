@@ -75,10 +75,17 @@ Give another example of a pair of operators that have an identity
 and are associative, commutative, and distribute over one another.
 (You do not have to prove these properties.)
 
+> The pair (_*_; _∸_) on ℕ
+> - identity for _*_ is 1, and for _∸_ right identity is 0
+> - _*_ is associative, and _∸_ is not
+> - _*_ is cummutative, and _∸_ is not
+> - _*_ distributes over _∸_ as in n * (p ∸ q) is (n * p) ∸ (n * q)
+
 Give an example of an operator that has an identity and is
 associative but is not commutative.
 (You do not have to prove these properties.)
 
+> Matrix multiplication A x B is associative but not commutative and has I as identity
 
 ## Associativity
 
@@ -503,6 +510,7 @@ Here is the lemma's statement and proof:
     suc (suc m + n)
   ∎
 ```
+
 The signature states that we are defining the identifier `+-suc` which provides
 evidence for the proposition:
 
@@ -565,6 +573,7 @@ Finally, here is our proposition's statement and proof:
     suc n + m
   ∎
 ```
+
 The first line states that we are defining the identifier
 `+-comm` which provides evidence for the proposition:
 
@@ -617,6 +626,7 @@ will suggest what lemmas to prove.
 
 We can apply associativity to rearrange parentheses however we like.
 Here is an example:
+
 ```agda
 +-rearrange : ∀ (m n p q : ℕ) → (m + n) + (p + q) ≡ m + (n + p) + q
 +-rearrange m n p q =
@@ -628,6 +638,7 @@ Here is an example:
     (m + (n + p)) + q
   ∎
 ```
+
 No induction is required, we simply apply associativity twice.
 A few points are worthy of note.
 
@@ -711,6 +722,80 @@ judgments where the first number is less than _m_.
 There is also a completely finite approach to generating the same equations,
 which is left as an exercise for the reader.
 
+> omg - that would be.. me _!!!_ (screams)
+
+we create both the naturals and the instances of associativity of addition at
+the same time. Then on any day there would be only a finite set of instances:
+
+    -- In the beginning, we know nothing.
+
+Now, we apply the rules to all the judgment we know about.  Only the
+base case for naturals applies:
+
+    -- On the first day, we know zero 
+    0 : ℕ
+
+Again, we apply all the rules we know.  This gives us a new natural,
+and our first equation about addition being associative.
+
+    -- On the second day, we know one and all associations that contain 0.
+    0 : ℕ
+    1 : ℕ  (0 + 0) + 0 ≡ 0 + (0 + 0)
+
+Then we repeat the process.  We get one more equation about addition
+from the base case, and also get an equation from the inductive case,
+applied to equation of the previous day:
+
+    -- On the third day, we know two and all associations that contain 0 and 1.
+    0 : ℕ
+    1 : ℕ  (0 + 0) + 0 ≡ 0 + (0 + 0)
+    2 : ℕ  (0 + 0) + 1 ≡ 0 + (0 + 1)
+           (0 + 1) + 0 ≡ 0 + (1 + 0)
+           (0 + 1) + 1 ≡ 0 + (1 + 1)
+           (1 + 0) + 0 ≡ 1 + (0 + 0)
+           (1 + 0) + 1 ≡ 1 + (0 + 1)
+           (1 + 1) + 0 ≡ 1 + (1 + 0)
+           (1 + 1) + 1 ≡ 1 + (1 + 1)
+
+We got the hang of it by now:
+
+    -- On the fourth day, we know three and all associations that contain 0, 1 and 2.
+    0 : ℕ
+    1 : ℕ  (0 + 0) + 0 ≡ 0 + (0 + 0)
+    2 : ℕ  (0 + 0) + 1 ≡ 0 + (0 + 1)
+           (0 + 1) + 0 ≡ 0 + (1 + 0)
+           (0 + 1) + 1 ≡ 0 + (1 + 1)
+           (1 + 0) + 0 ≡ 1 + (0 + 0)
+           (1 + 0) + 1 ≡ 1 + (0 + 1)
+           (1 + 1) + 0 ≡ 1 + (1 + 0)
+           (1 + 1) + 1 ≡ 1 + (1 + 1)
+    3 : ℕ  (0 + 0) + 2 ≡ 0 + (0 + 2)
+           (0 + 1) + 2 ≡ 0 + (1 + 2)
+           (0 + 2) + 0 ≡ 0 + (2 + 0)
+           (0 + 2) + 1 ≡ 0 + (2 + 1)
+           (0 + 2) + 2 ≡ 0 + (2 + 2)
+           (1 + 0) + 2 ≡ 1 + (0 + 2)
+           (1 + 1) + 2 ≡ 1 + (1 + 2)
+           (1 + 2) + 0 ≡ 1 + (2 + 0)
+           (1 + 2) + 1 ≡ 1 + (2 + 1)
+           (1 + 2) + 2 ≡ 1 + (2 + 2)
+           (2 + 0) + 0 ≡ 2 + (0 + 0)
+           (2 + 0) + 1 ≡ 2 + (0 + 1)
+           (2 + 0) + 2 ≡ 2 + (0 + 2)
+           (2 + 1) + 0 ≡ 2 + (1 + 0)
+           (2 + 1) + 1 ≡ 2 + (1 + 1)
+           (2 + 1) + 2 ≡ 2 + (1 + 2)
+           (2 + 2) + 0 ≡ 2 + (2 + 0)
+           (2 + 2) + 1 ≡ 2 + (2 + 1)
+           (2 + 2) + 2 ≡ 2 + (2 + 2)
+
+
+On the _n_'th day there will be _n_ distinct natural numbers, and
+_n × (n-1) / 2_ equations about addition.  The number _n_ and all equations
+for addition of numbers less than _n_ first appear by day _n+1_.
+This gives an entirely finitist view of infinite sets of data and
+equations relating the data.
+
 #### Exercise `finite-+-assoc` (stretch) {#finite-plus-assoc}
 
 Write out what is known about associativity of addition on each of the
@@ -718,7 +803,44 @@ first four days using a finite story of creation, as
 [earlier](/Naturals/#finite-creation).
 
 ```agda
--- Your code goes here
+-- On the first day
+n0 = 0
+
+-- On the second day
+n1 = 1
+assoc1-000 = (n0 + n0) + n0 ≡ n0 + (n0 + n0)
+
+-- On the third day
+n2 = 2
+assoc2-001 = (n0 + n0) + n1 ≡ n0 + (n0 + n1)
+assoc2-010 = (n0 + n1) + n0 ≡ n0 + (n1 + n0)
+assoc2-011 = (n0 + n1) + n1 ≡ n0 + (n1 + n1)
+assoc2-100 = (n1 + n0) + n0 ≡ n1 + (n0 + n0)
+assoc2-101 = (n1 + n0) + n1 ≡ n1 + (n0 + n1)
+assoc2-110 = (n1 + n1) + n0 ≡ n1 + (n1 + n0)
+assoc2-111 = (n1 + n1) + n1 ≡ n1 + (n1 + n1)
+
+-- On the fourth day
+n3 = 3
+assoc3-002 = (n0 + n0) + n2 ≡ n0 + (n0 + n2)
+assoc3-012 = (n0 + n1) + n2 ≡ n0 + (n1 + n2)
+assoc3-020 = (n0 + n2) + n0 ≡ n0 + (n2 + n0)
+assoc3-021 = (n0 + n2) + n1 ≡ n0 + (n2 + n1)
+assoc3-022 = (n0 + n2) + n2 ≡ n0 + (n2 + n2)
+assoc3-102 = (n1 + n0) + n2 ≡ n1 + (n0 + n2)
+assoc3-112 = (n1 + n1) + n2 ≡ n1 + (n1 + n2)
+assoc3-120 = (n1 + n2) + n0 ≡ n1 + (n2 + n0)
+assoc3-121 = (n1 + n2) + n1 ≡ n1 + (n2 + n1)
+assoc3-122 = (n1 + n2) + n2 ≡ n1 + (n2 + n2)
+assoc3-200 = (n2 + n0) + n0 ≡ n2 + (n0 + n0)
+assoc3-201 = (n2 + n0) + n1 ≡ n2 + (n0 + n1)
+assoc3-202 = (n2 + n0) + n2 ≡ n2 + (n0 + n2)
+assoc3-210 = (n2 + n1) + n0 ≡ n2 + (n1 + n0)
+assoc3-211 = (n2 + n1) + n1 ≡ n2 + (n1 + n1)
+assoc3-212 = (n2 + n1) + n2 ≡ n2 + (n1 + n2)
+assoc3-220 = (n2 + n2) + n0 ≡ n2 + (n2 + n0)
+assoc3-221 = (n2 + n2) + n1 ≡ n2 + (n2 + n1)
+assoc3-222 = (n2 + n2) + n2 ≡ n2 + (n2 + n2)
 ```
 
 ## Associativity with rewrite
@@ -890,7 +1012,20 @@ just apply the previous results which show addition
 is associative and commutative.
 
 ```agda
--- Your code goes here
++-swap : ∀ (m n p : ℕ) → m + (n + p) ≡ n + (m + p)
++-swap m n p =
+  begin
+    m + (n + p)
+  -- using symmetry of +-assoc, ie. move brackets to the left 
+  ≡⟨ sym (+-assoc m n p) ⟩       
+    (m + n) + p
+  -- using congruence of rhs addition on +-comm, ie. 
+  ≡⟨ cong (\x → x + p) (+-comm m n) ⟩  
+    (n + m) + p
+  -- using +-assoc, move brackets to the right
+  ≡⟨ +-assoc n m p ⟩
+    n + (m + p)
+  ∎
 ```
 
 
@@ -903,7 +1038,24 @@ Show multiplication distributes over addition, that is,
 for all naturals `m`, `n`, and `p`.
 
 ```agda
--- Your code goes here
+*-distrib-+ : ∀ (p m n : ℕ) → (m + n) * p ≡ (m * p) + (n * p)
+
+*-distrib-+ p zero n =
+  refl
+
+*-distrib-+ p (suc m) n =
+  begin
+    (suc m + n) * p
+  -- using multiplication being defined as inductive addition on m
+  ≡⟨ refl ⟩
+    p + (m + n) * p
+  -- using distribution of multiplication over addition being congruent
+  ≡⟨ cong (_+_ p) (*-distrib-+ p m n) ⟩
+    p + (m * p + n * p)
+  -- using symmetry of +-assoc as with +-swap, and refl as above
+  ≡⟨ sym (+-assoc p (m * p) (n * p)) ⟩
+    suc m * p + n * p
+  ∎
 ```
 
 
